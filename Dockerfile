@@ -13,7 +13,9 @@ RUN apt-get update && \
  dpkg -i libstdc++5_3.3.6-27.2_amd64.deb && rm libstdc++5_3.3.6-27.2_amd64.deb && \
  curl -O -L http://downloads.sourceforge.net/project/firebird/firebird-linux-amd64/2.0.7-Release/FirebirdSS-2.0.7.13318-0.amd64.tar.gz && tar -xvf FirebirdSS-2.0.7.13318-0.amd64.tar.gz && \
  grep -v "InteractiveInstall=1" FirebirdSS-2.0.7.13318-0.amd64/install.sh | grep -v "Press Enter to start installation" > FirebirdSS-2.0.7.13318-0.amd64/fbinst.sh
- RUN cd ./FirebirdSS-2.0.7.13318-0.amd64 && sh ./fbinst.sh
+
+#cleanup
+RUN cd ./FirebirdSS-2.0.7.13318-0.amd64 && sh ./fbinst.sh && cd / && rm -rf FirebirdSS-2.0.7.13318-0.amd64*
 
 #entry point
 COPY firebird-docker-entrypoint.sh /
